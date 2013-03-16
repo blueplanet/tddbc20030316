@@ -20,6 +20,14 @@ describe Ltsv do
       @ltsv.set("foo", "hoge").should be_nil
       @ltsv.set("foo", "piyo").should == 'hoge'
     end
+
+    it 'when key set nill' do
+      expect { @ltsv.set(nil, 'momo') }.to raise_error(ArgumentError)
+    end
+
+    it 'when key set blank' do
+      expect { @ltsv.set('', 'gogo') }.to raise_error(ArgumentError)
+    end
   end
 
   context ".get" do
@@ -31,6 +39,10 @@ describe Ltsv do
     it "when key foo assign hoge should return nil" do
       @ltsv.set("foo", "blabla")
       @ltsv.get("foo").should == "blabla"
+    end
+
+    it 'when key not found' do
+      @ltsv.get("todo").should be_nil
     end
   end
 
