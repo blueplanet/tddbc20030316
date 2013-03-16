@@ -4,7 +4,8 @@ class Ltsv
   end
 
   def set(key, value)
-    raise ArgumentError if key.nil? or key.empty?
+    raise ArgumentError, "key is blank" if key.nil? or key.empty?
+    raise ArgumentError, "value is nil" if value.nil?
     tmp = @hash.delete(key)
     @hash[key] = value
     tmp

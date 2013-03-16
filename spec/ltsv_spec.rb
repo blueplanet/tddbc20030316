@@ -21,12 +21,22 @@ describe Ltsv do
       @ltsv.set("foo", "piyo").should == 'hoge'
     end
 
-    it 'when key set nill' do
-      expect { @ltsv.set(nil, 'momo') }.to raise_error(ArgumentError)
+    context "when invalid" do
+      it 'key is nil' do
+        expect { @ltsv.set(nil, 'momo') }.to raise_error(ArgumentError)
+      end
+
+      it 'key is blank' do
+        expect { @ltsv.set('', 'gogo') }.to raise_error(ArgumentError)
+      end
+
+      it 'value is nil' do
+        expect { @ltsv.set('momo', nil) }.to raise_error(ArgumentError)
+      end
     end
 
-    it 'when key set blank' do
-      expect { @ltsv.set('', 'gogo') }.to raise_error(ArgumentError)
+    it 'when value set blank' do
+      expect { @ltsv.set('momo', "") }.to_not raise_error(ArgumentError)
     end
   end
 
