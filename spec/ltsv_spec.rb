@@ -15,6 +15,11 @@ describe Ltsv do
     it "when key foo assign hoge should return nil" do
       @ltsv.set("foo", "blabla").should be_nil
     end
+
+    it "when key foo assign hoge and piyo should return hoge" do
+      @ltsv.set("foo", "hoge").should be_nil
+      @ltsv.set("foo", "piyo").should == 'hoge'
+    end
   end
 
   context ".get" do
@@ -27,5 +32,12 @@ describe Ltsv do
       @ltsv.set("foo", "blabla")
       @ltsv.get("foo").should == "blabla"
     end
+  end
+
+  context ".dump" do
+    it {
+      @ltsv.set('foo', 'hoge')
+      @ltsv.dump.should == "foo:hoge\n"
+    }
   end
 end
