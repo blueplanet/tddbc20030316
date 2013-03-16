@@ -39,5 +39,23 @@ describe Ltsv do
       @ltsv.set('foo', 'hoge')
       @ltsv.dump.should == "foo:hoge\n"
     }
+    it {
+      @ltsv.set('foo', 'hoge')
+      @ltsv.set('bar', 'fuga')
+      @ltsv.dump.should == "foo:hoge\tbar:fuga\n"
+    }
+    it {
+      @ltsv.set('foo', 'hoge')
+      @ltsv.set('bar', 'fuga')
+      @ltsv.set('foo', 'piyo')
+      @ltsv.dump.should == "bar:fuga\tfoo:piyo\n"
+    }
+    it {
+      @ltsv.set('foo', 'hoge')
+      @ltsv.set('bar', 'fuga')
+      @ltsv.set('baz', 'fuga1')
+      @ltsv.set('foo', 'piyo')
+      @ltsv.dump.should == "bar:fuga\tbaz:fuga1\tfoo:piyo\n"
+    }
   end
 end

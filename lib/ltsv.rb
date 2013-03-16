@@ -4,7 +4,7 @@ class Ltsv
   end
 
   def set(key, value)
-    tmp = @hash[key]
+    tmp = @hash.delete(key)
     @hash[key] = value
     tmp
   end
@@ -16,6 +16,6 @@ class Ltsv
   def dump
     @hash.map do |key, value|
       "#{key}:#{value}"
-    end.join + "\n"
+    end.join("\t") + "\n"
   end
 end
