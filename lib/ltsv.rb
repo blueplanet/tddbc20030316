@@ -17,7 +17,17 @@ class Ltsv
 
   def dump
     @hash.map do |key, value|
-      "#{key}:#{value}"
+      "#{key}:#{value.gsub(":", "\\:").gsub("\t", "\\t").gsub("\n", "\\n")}"
     end.join("\t") + "\n"
+  end
+
+  def self.parse(dump)
+    ltsv = new
+    dump.strip.split("\t").each do |pair|
+      key, value = pair.split(":")
+      ltsv.set(key, value)
+    end
+
+    ltsv
   end
 end
